@@ -11,12 +11,13 @@ if(isset($_POST['city']) && !empty($_POST['city'])) {
         $error_message = $lat_and_long['message'];
     } else { //otherwise go ahead get the weather condition of the city
         $weather_info = file_get_contents("https://api.openweathermap.org/data/2.5/weather?lat=$lat&lon=$lon&units=metric&appid=1e4c1753170ff44df4a5b7b10c37a7e5");
-        $weather_info = json_decode($weather_info); //convert the json recieved to PHP array
+        $weather_info = json_decode($weather_info, true); //convert the json recieved to PHP array
+        var_dump($weather_info);
         if(isset($weather_info['cod']) && $weather_info['cod']>=400) {
             $error = true;
             $error_message = $weather_info['message'];
         }
-        var_dump($weather_info);
+        
     }
 }
 require_once("./components/header.php");
@@ -35,14 +36,14 @@ if(isset($error_message)) { //if there is an error message then show it.
 </body>
 </html>
 <?php
-} else if($error == false && isset($weather_info)) {
+} else if($error == false && isset($weather_info)) { //if there is no error and the weather information is avaliable, then display it.
 ?>
 <body>
     <form class="getweather" action="getweather.php" method="post">
         <h1 class="heading">Weather Information</h1>
-        <p class="cityname"><?php echo $_POST['city'];?></p>
-        <p class="current_temperature">Current Temperature: <?php echo $weather_info['main']->temp;?></p>
-        <p class="description">Description: <?php echo $weather_info['weather'][0]->description;?></p>
+        <p class="cityname"><b>City:</b> <?php echo $_POST['city'];?></p>
+        <p class="current_temperature"><b>Current Temperature:</b> <?php echo $weather_info['main']['temp'];?></p>
+        <p class="description"><b>Description:</b> <?php echo $weather_info['weather'][0]['description'];?></p>
     </form>
 </body>
 </html>
