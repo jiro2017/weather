@@ -20,6 +20,11 @@
         text-align: center;
         word-wrap: break-word;
     }
+
+    form.getweather p.cityname, form.getweather p.current_temperature, form.getweather p.description {
+        font-size:1.2rem;
+    }
+
     form.getweather input{
         border-radius: 16px;
         width: 95%;
@@ -42,7 +47,11 @@
         display:none;
     }
 
-    form.getweather input[type="submit"] {
+    form.getweather p.error.show {
+        display: block;
+    }
+
+    form.getweather input[type="submit"], form.getweather input[type="button"] {
         background:green;
         color:white;
         width:fit-content;
