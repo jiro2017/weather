@@ -13,7 +13,7 @@ if(isset($_POST['city']) && !empty($_POST['city'])) {
     } else { //otherwise go ahead get the weather condition of the city
         $lat = $lat_and_long[0]['lat'];
         $lon = $lat_and_long[0]['lon'];
-        if($_POST['unit']=='Imperial') $unit='imperial'; else if($_POST['unit']=='metric') $unit = 'metric'; else $unit='metric';
+        if($_POST['unit']=='imperial') $unit='imperial'; else if($_POST['unit']=='metric') $unit = 'metric'; else $unit='metric';
         $weather_info = file_get_contents("https://api.openweathermap.org/data/2.5/weather?lat=$lat&lon=$lon&units=$unit&appid=1e4c1753170ff44df4a5b7b10c37a7e5");
         $weather_info = json_decode($weather_info, true); //convert the json recieved to PHP array
 
@@ -54,7 +54,7 @@ if(isset($error_message)) { //if there is an error message then show it.
     <form class="getweather" action="getweather.php" method="post">
         <h1 class="heading">Weather Information</h1>
         <p class="cityname"><b>City:</b> <?php echo $_POST['city'];?></p>
-        <p class="current_temperature"><b>Current Temperature:</b> <?php echo $weather_info['main']['temp'];?> <?php if($_POST['unit']=="metric") "&deg;C"; else "&deg;F";?></p>
+        <p class="current_temperature"><b>Current Temperature:</b> <?php echo $weather_info['main']['temp'];?> <?php if($_POST['unit']=="metric") echo "&deg;C"; else echo "&deg;F";?></p>
         <p class="description"><b>Description:</b> <?php echo $weather_info['weather'][0]['description'];?></p>
         <input type="button" value="Get weather information on another city" onclick="window.location.href='getweather.php'">
     </form>
