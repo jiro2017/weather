@@ -34,7 +34,7 @@ if(isset($error_message)) { //if there is an error message then show it.
         <p class="error show"><?php echo $error_message; ?></p>
         <h1 class="heading">Please Enter your city to see weather forecasts</h1>
         <input type="text" name="city" id="city_input" value="<?php if(isset($_POST['city'])) echo $_POST['city']; ?>" placeholder="Please enter the name of the city and country.">
-        <input type="text" name="city" id="city_input" placeholder="Please enter the name of the city and country." required>
+        <input type="text" name="city" id="city_input" placeholder="Please enter the name of the city." required>
         
         <label class="radio-inline">Imperial unit</label>
         <input type="radio" name="unit" id="imperial" value="imperial">
@@ -64,7 +64,7 @@ if(isset($error_message)) { //if there is an error message then show it.
     <body>
     <form class="getweather" action="getweather.php" method="post">
         <h1 class="heading">Please Enter your city to see weather forecasts</h1>
-        <input type="text" name="city" id="city_input" placeholder="Please enter the name of the city and country." required>
+        <input type="text" name="city" id="city_input" placeholder="Please enter the name of the city." required>
         
         
         <label class="radio-inline">Imperial unit</label>
