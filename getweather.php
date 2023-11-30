@@ -34,7 +34,7 @@ if(isset($error_message)) { //if there is an error message then show it.
         <h1 class="heading">Please Enter your city to see weather forecasts</h1>
         <input type="text" name="city" id="city_input" value="<?php if(isset($_POST['city'])) echo $_POST['city']; ?>" placeholder="Please enter the name of the city and country.">
         <p class="error">error</p>
-        <input type="submit" value="Submit">
+        <input type="submit" value="Submit" >
     </form>
 </body>
 </html>

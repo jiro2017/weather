@@ -8,6 +8,7 @@
 <style>
     body {
         background: rgb(230, 230, 230);
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     }
     form.getweather {
         margin:auto;
