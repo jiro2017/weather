@@ -38,6 +38,15 @@
         font-weight:bold;
     }
 
+    form.getweather label.radio-inline{
+        display: inline;
+    }
+
+    form.getweather input[type='radio'] {
+        display: inline;
+        width: fit-content;
+    }
+
     form.getweather input.error {
         border:2px solid red;
     }

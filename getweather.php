@@ -13,7 +13,8 @@ if(isset($_POST['city']) && !empty($_POST['city'])) {
     } else { //otherwise go ahead get the weather condition of the city
         $lat = $lat_and_long[0]['lat'];
         $lon = $lat_and_long[0]['lon'];
-        $weather_info = file_get_contents("https://api.openweathermap.org/data/2.5/weather?lat=$lat&lon=$lon&units=metric&appid=1e4c1753170ff44df4a5b7b10c37a7e5");
+        if($_POST['unit']=='Imperial') $unit='imperial'; else if($_POST['unit']=='metric') $unit = 'metric'; else $unit='metric';
+        $weather_info = file_get_contents("https://api.openweathermap.org/data/2.5/weather?lat=$lat&lon=$lon&units=$unit&appid=1e4c1753170ff44df4a5b7b10c37a7e5");
         $weather_info = json_decode($weather_info, true); //convert the json recieved to PHP array
 
         if(isset($weather_info['cod']) && $weather_info['cod']>=400) {
@@ -33,6 +34,14 @@ if(isset($error_message)) { //if there is an error message then show it.
         <p class="error show"><?php echo $error_message; ?></p>
         <h1 class="heading">Please Enter your city to see weather forecasts</h1>
         <input type="text" name="city" id="city_input" value="<?php if(isset($_POST['city'])) echo $_POST['city']; ?>" placeholder="Please enter the name of the city and country.">
+        <input type="text" name="city" id="city_input" placeholder="Please enter the name of the city and country." required>
+        
+        <label class="radio-inline">Imperial unit</label>
+        <input type="radio" name="unit" id="imperial" value="imperial">
+
+        <label class="radio-inline">Metric Unit</label>
+        <input type="radio" name="unit" id="metric" value="metric" checked>
+
         <p class="error">error</p>
         <input type="submit" value="Submit" >
     </form>
@@ -45,7 +54,7 @@ if(isset($error_message)) { //if there is an error message then show it.
     <form class="getweather" action="getweather.php" method="post">
         <h1 class="heading">Weather Information</h1>
         <p class="cityname"><b>City:</b> <?php echo $_POST['city'];?></p>
-        <p class="current_temperature"><b>Current Temperature:</b> <?php echo $weather_info['main']['temp'];?></p>
+        <p class="current_temperature"><b>Current Temperature:</b> <?php echo $weather_info['main']['temp'];?> <?php if($_POST['unit']=="metric") "&deg;C"; else "&deg;F";?></p>
         <p class="description"><b>Description:</b> <?php echo $weather_info['weather'][0]['description'];?></p>
         <input type="button" value="Get weather information on another city" onclick="window.location.href='getweather.php'">
     </form>
@@ -56,6 +65,13 @@ if(isset($error_message)) { //if there is an error message then show it.
     <form class="getweather" action="getweather.php" method="post">
         <h1 class="heading">Please Enter your city to see weather forecasts</h1>
         <input type="text" name="city" id="city_input" placeholder="Please enter the name of the city and country." required>
+        
+        
+        <label class="radio-inline">Imperial unit</label>
+        <input type="radio" name="unit" id="imperial" value="imperial">
+
+        <label class="radio-inline">Metric Unit</label>
+        <input type="radio" name="unit" id="metric" value="metric" checked>
         <p class="error">error</p>
         <input type="submit" value="Submit">
     </form>
